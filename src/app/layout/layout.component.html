@@ -1,0 +1,60 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="230px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+      [nzTrigger]="null">
+      <div class="sidebar-logo">
+          <a href="" target="_blank">
+              <img src="../../assets/img/images-logo-4Teen.png" alt="logo">
+              <!-- <h1>Ant Design Of Angular</h1> -->
+          </a>
+      </div>
+      <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item nzMatchRouter nzTitle="Đơn hàng" routerLink="/layout/category">
+            <i nz-icon nzType="shop" nzTheme="outline"></i>
+            <div *ngIf="isCollapsed == false" style="float: right;width: 80%;text-align: left;">Loại sản phẩm</div>
+        </li>
+        <li nz-menu-item nzMatchRouter nzTitle="Đơn hàng" routerLink="/layout/product">
+            <i nz-icon nzType="skin" nzTheme="outline"></i>
+            <div *ngIf="isCollapsed == false" style="float: right;width: 80%;text-align: left;">Sản phẩm</div>
+        </li>
+        <li nz-menu-item nzMatchRouter nzTitle="Đơn hàng" routerLink="/layout/order">
+            <i nz-icon nzType="shopping" nzTheme="outline"></i>
+            <div *ngIf="isCollapsed == false" style="float: right;width: 80%;text-align: left;">Đơn hàng</div>
+        </li>
+        <li nz-menu-item nzMatchRouter nzTitle="Đơn hàng" routerLink="/layout/account">
+            <i nz-icon nzType="user" nzTheme="outline"></i>
+            <div *ngIf="isCollapsed == false" style="float: right;width: 80%;text-align: left;">Tài khoản</div>
+        </li>
+      </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+        <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="toggleCollapsed()"></i>
+        <!-- <div class="antd-pro-components-global-header-index-right">      
+          <div class="inline-component" nz-dropdown [nzDropdownMenu]="accountMenu">
+            <nz-avatar nzIcon="user" nzSrc="{{currentUser.avatar}}">
+            </nz-avatar>
+            <span style="margin-left: 10px;">{{currentUser?.userName}}</span>
+          </div>
+          <nz-dropdown-menu #accountMenu="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item nzMatchRouter [routerLink]="['/account/setting']">
+                    <i nz-icon nzType="setting" nzTheme="outline"></i>
+                    <span>Thiết lập tài khoản</span>
+                </li>
+
+                <li nz-menu-divider></li>
+                <li nz-menu-item (click)="logout()">
+                    <i nz-icon nzType="logout" nzTheme="outline"></i>
+                    <span>Đăng xuất</span>
+                </li>
+            </ul>
+        </nz-dropdown-menu>
+        </div> -->
+      </nz-header>
+    <nz-content>
+        <div class="inner-content">
+            <router-outlet></router-outlet>
+        </div>
+    </nz-content>
+</nz-layout>
+</nz-layout>
