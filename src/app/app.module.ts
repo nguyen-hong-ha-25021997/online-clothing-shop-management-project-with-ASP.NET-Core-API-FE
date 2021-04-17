@@ -18,7 +18,6 @@ import { UpdateAccountComponent } from './account/update-account/update-account.
 import { AccountService } from 'src/share/account.service';
 import { ProductsService } from 'src/share/product.service';
 import { ProductComponent } from './product/product.component';
-import { CreateProductComponent } from './product/create-product/create-product.component';
 import { OrderComponent } from './order/order.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { OrderDetailsService } from 'src/share/orderdetail.service';
@@ -77,6 +76,7 @@ import { ChartModule } from '@syncfusion/ej2-angular-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
 import { ProductModalComponent } from './product/product-modal/product-modal.component';
+import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -93,7 +93,6 @@ export function tokenGetter() {
     CreateAccountComponent,
     UpdateAccountComponent,
     ProductComponent,
-    CreateProductComponent,
     OrderComponent,
     OrderdetailComponent,
     UploadComponent,
@@ -162,7 +161,10 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [CategoriesService, AccountService, ProductsService, OrderDetailsService, OrdersService],
+  
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    CategoriesService, AccountService, ProductsService, OrderDetailsService, OrdersService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

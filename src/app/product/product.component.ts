@@ -21,18 +21,6 @@ export class ProductComponent implements OnInit {
   loading: boolean;
   valueModel = '';
 
-  total:any;
-  displayData: PagingParams = {
-    PageNumber: 1,
-    PageSize: 20,
-    Keyword: '',
-    SortKey: '',
-    SortValue: '',
-    fromDate: "",
-    toDate: "",
-    KeywordCol: "",
-    ColName: "",
-  };
   public token;
   searchValue="";
   public perssions;
@@ -65,62 +53,14 @@ export class ProductComponent implements OnInit {
       if (element == "product.Delete")
         this.currentPermission.Delete = true;
     });
-  }
-
-  filterTable() {
     this.LoadData();
-  }
-
-  onQueryParamsChange(params: NzTableQueryParams): void {
-    const { pageSize, pageIndex, sort, filter } = params;
-    const currentSort = sort.find(item => item.value !== null);
-    const sortField = (currentSort && currentSort.key) || null;
-    const sortOrder = (currentSort && currentSort.value) || null;
-    // console.log(pageIndex, pageSize, sortField, sortOrder, filter);
-    // this.displayData.PageSize = pageSize;
-    // this.displayData.PageNumber = pageIndex;
-    const sortconst: any = {
-      key: sortField,
-      value: sortOrder
-    }
-    //his.sort(sortconst);
-    if (sortField != null && sortOrder != null) {
-      this.sort(sortconst);
-    }
-    if (filter.length > 0) {
-      this.displayData.ColName = filter[0].key;
-      this.displayData.KeywordCol = filter[0].value;
-      if (this.displayData.KeywordCol == null) {
-        this.displayData.KeywordCol = '';
-      }
-    }
-    this.LoadData();
-  }
-
-  sort(sort: { key: string; value: string }): void {
-    this.displayData.SortKey = sort.key;
-    this.displayData.SortValue = sort.value;
-    this.LoadData();
-  }
-
-  onChangeSearch(cont,event: any) {
-    const arrCondition =[];
-    arrCondition.push(cont);
-
-    //console.log(arrCondition);
-    this.displayData.ColName = cont;
-    this.displayData.KeywordCol = event;
-    //console.log(event);
-    this.listOfData = SearchEngine(this.listOfDatatmp, arrCondition, event);
   }
 
   LoadData() {
     this.loading = true;
     this.productService.getProducts().subscribe((rs: any) => {
-      console.log(rs);
       this.listOfDatatmp = rs;
       this.listOfData = rs;
-      console.log(this.listOfData)
       this.loading = false;
     }, _ => {
       this.loading = false;
@@ -138,7 +78,6 @@ export class ProductComponent implements OnInit {
         top: '10px'
       },
       nzComponentParams: {
-        idNew: this.listOfData.length + 1,
         isAddNew: true
       },
     });
@@ -149,7 +88,7 @@ export class ProductComponent implements OnInit {
     });
   }
   changeSearch(event: any) {
-    const arrCondition = ['category_Name','category_Quantity'];
+    const arrCondition = ['product_Name','category_Name','product_Style','product_Size','product_Note','product_Show','product_Price'];
     this.listOfData = SearchEngine(this.listOfDatatmp, arrCondition, event);
   }
 

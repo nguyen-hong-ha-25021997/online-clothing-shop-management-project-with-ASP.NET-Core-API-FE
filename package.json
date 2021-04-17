@@ -23,6 +23,7 @@
     "@angular/router": "~10.1.2",
     "@auth0/angular-jwt": "^5.0.2",
     "@syncfusion/ej2-angular-charts": "^19.1.56",
+    "moment": "^2.29.1",
     "ng-material-multilevel-menu": "^5.0.1",
     "ng-zorro-antd": "^11.4.0",
     "ngx-spinner": "^11.0.1",

@@ -60,7 +60,6 @@ export class CategoryComponent implements OnInit {
   LoadData() {
     this.loading = true;
     this.categoryService.getCategories().subscribe((rs: any) => {
-      console.log(rs);
       this.listOfDatatmp = rs;
       this.listOfData = rs;
       this.loading = false;

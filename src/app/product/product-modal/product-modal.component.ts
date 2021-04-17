@@ -12,13 +12,13 @@ import { CategoriesService } from 'src/share/category.service';
 })
 export class ProductModalComponent implements OnInit {
 
-  @Input() idNew: any;
   @Input() isAddNew: boolean;
   @Input() data: any;
   myFormGroup: FormGroup;
   categories: any[] = []
   
-  public response:{dbPath:''}
+  isUpload=false;
+  public response:{dbPath:''};
   public progress: number;
   public uploadmessage: string;
 
@@ -35,10 +35,11 @@ export class ProductModalComponent implements OnInit {
     this.categorysv.getCategories().subscribe((rs:any) =>{
       this.categories = rs;
     })
-    this.createForm();
     if(this.isAddNew) {
-      this.myFormGroup.get(`product_Id`).setValue(this.idNew);
+      this.createAddForm();
     } else {
+      console.log(this.data)
+      this.createUpdateForm();
       this.myFormGroup.patchValue({
         ...this.data
       });
@@ -59,7 +60,7 @@ export class ProductModalComponent implements OnInit {
       this.productsv.postProducts(this.myFormGroup.value).subscribe((rs: any) => {
         if (rs === 1) {
           this.modal.destroy(rs);
-          this.message.create('success', `Thêm chênh lệch thành công`);
+          this.message.create('success', `Thêm sản phẩm thành công`);
 
           // console.log(rs);
         } else {
@@ -70,11 +71,15 @@ export class ProductModalComponent implements OnInit {
       });
     }
     else {
+      if(this.isUpload){
+        this.myFormGroup.get('product_Image').setValue(this.response.dbPath);
+      }
+      console.log(this.myFormGroup)
       this.productsv.putProducts(this.myFormGroup.getRawValue()).subscribe(
         (result: any) => {
           if (result === 1) {
             // console.log(result);
-            this.message.create('success', `Cập nhật thông tin chênh lệch thành công`);
+            this.message.create('success', `Cập nhật thông tin thành công`);
             this.modal.destroy(result);
             
           } else {
@@ -96,7 +101,21 @@ export class ProductModalComponent implements OnInit {
     }
   }
 
-  createForm() {
+  createAddForm() {
+    this.myFormGroup = this.fb.group({
+      category_Id: [0],
+      category_Name: [null],
+      product_Name: [null],
+      product_Style: [null],
+      product_Size: [null],
+      product_Image: [null],
+      product_Price: [0],
+      product_Show: [null],
+      product_Quantity: [0],
+      product_Note: [null],
+    });
+  }
+  createUpdateForm() {
     this.myFormGroup = this.fb.group({
       product_Id: [0],
       category_Id: [0],
@@ -118,5 +137,6 @@ export class ProductModalComponent implements OnInit {
 
   uploadFinished = (event) =>{
     this.response = event;
+    this.isUpload = true;
   }
 }

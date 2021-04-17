@@ -24,7 +24,7 @@ public postProducts(product: any) {
 
 public putProducts(product: any) {
   return this.httpClient.put(
-    `${environment.localDomain}/api/Products/${product.id}`, product
+    `${environment.localDomain}/api/Products/${product.product_Id}`, product
   );
 }
 public getProductsByName(name:string){

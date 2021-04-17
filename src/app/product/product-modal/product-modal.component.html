@@ -8,7 +8,7 @@
         </nz-form-item>
         <nz-form-item>
             <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="category_Id">Loại sản phẩm</nz-form-label>
-            <nz-form-control [nzSm]="15" [nzXs]="24">
+            <nz-form-control [nzSm]="16" [nzXs]="24">
               <nz-select nzSize="small" nzShowSearch formControlName="category_Id"
                 (ngModelChange)="changeNhaCungCap($event)">
                 <nz-option *ngFor="let option of categories" [nzLabel]="option.category_Name" [nzValue]="option.category_Id">
@@ -17,46 +17,47 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label class="flabel" nzRequired nzFor="product_Style">Kiểu</nz-form-label>
-            <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
-                <input nz-input nzSize="small" type="number" formControlName="product_Style" />
+            <nz-form-label [nzSm]="8" [nzXs]="24" class="flabel" nzRequired nzFor="product_Style">Kiểu</nz-form-label>
+            <nz-form-control  class="fcontrol" nzErrorTip="Không được bỏ trống!">
+                <input nz-input nzSize="small" formControlName="product_Style" />
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label class="flabel" nzRequired nzFor="product_Size">Kích cỡ</nz-form-label>
+            <nz-form-label [nzSm]="8" [nzXs]="24" class="flabel" nzRequired nzFor="product_Size">Kích cỡ</nz-form-label>
             <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
-                <input nz-input nzSize="small" type="number" formControlName="product_Size" />
+                <input nz-input nzSize="small" formControlName="product_Size" />
             </nz-form-control>
         </nz-form-item>
         <!-- <nz-form-item>
-            <nz-form-label class="flabel" nzRequired nzFor="product_Image">Số lượng</nz-form-label>
+            <nz-form-label [nzSm]="8" [nzXs]="24" class="flabel" nzRequired nzFor="product_Image">Ảnh</nz-form-label>
             <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
                 <input nz-input nzSize="small" type="number" formControlName="product_Image" />
             </nz-form-control>
         </nz-form-item> -->
         <nz-form-item>
-            <nz-form-label class="flabel" nzRequired nzFor="product_Price">Giá</nz-form-label>
+            <nz-form-label [nzSm]="8" [nzXs]="24" class="flabel" nzRequired nzFor="product_Price">Giá</nz-form-label>
             <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
                 <input nz-input nzSize="small" type="number" formControlName="product_Price" />
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label class="flabel" nzRequired nzFor="product_Show">Mã hiển thị</nz-form-label>
+            <nz-form-label [nzSm]="8" [nzXs]="24" class="flabel" nzRequired nzFor="product_Show">Mã hiển thị</nz-form-label>
             <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
-                <input nz-input nzSize="small" type="number" formControlName="product_Show" />
+                <input nz-input nzSize="small" formControlName="product_Show" />
             </nz-form-control>
         </nz-form-item><nz-form-item>
-            <nz-form-label class="flabel" nzRequired nzFor="product_Quantity">Số lượng</nz-form-label>
+            <nz-form-label [nzSm]="8" [nzXs]="24" class="flabel" nzRequired nzFor="product_Quantity">Số lượng</nz-form-label>
             <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
                 <input nz-input nzSize="small" type="number" formControlName="product_Quantity" />
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label class="flabel" nzRequired nzFor="product_Note">Ghi chú</nz-form-label>
-            <nz-form-control class="fcontrol" nzErrorTip="Không được bỏ trống!">
-                <input nz-input nzSize="small" type="number" formControlName="product_Note" />
+            <nz-form-label [nzSm]="8" [nzXs]="24" class="flabel" nzFor="product_Note">Ghi chú</nz-form-label>
+            <nz-form-control class="fcontrol">
+                <input nz-input nzSize="small" formControlName="product_Note" />
             </nz-form-control>
         </nz-form-item>
+        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
     </div>
 </form>
 

@@ -1,0 +1,143 @@
+<div nz-row style="margin-top: 3px; margin-bottom: 1px;">
+  
+    <div nz-col nzSpan="8" style="text-align: left;">
+      <div style="float:right">
+        <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.fromDate"
+        placeholder="Từ" />
+        <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.toDate"
+        placeholder="Đến" />
+        <!-- <button nz-button nzSize="small" nzType="primary" style="margin-left: 2px;" (click)="filterTable()">
+          <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button> -->
+      </div>
+    </div>
+  
+    <div nz-col nzSpan="12" style="text-align: right;">
+      <div style="float:right;padding-left: 5px">
+        <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+          <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+            placeholder="Tìm kiếm" />
+          <ng-template #suffixIconSearch>
+            <i nz-icon nzType="search"></i>
+          </ng-template>
+        </nz-input-group>
+      </div>
+    </div>
+  </div>
+  <nz-table [nzScroll]="{ x: '900px'}" #fixedTable nzSize="small" nzBordered nzShowSizeChanger
+    [nzFrontPagination]="false" [nzData]="listOfData" nzShowQuickJumper="true" [(nzPageSize)]="displayData.PageSize"
+    nzShowTotal [nzPageSizeOptions]="pageSizeOptions" [(nzPageIndex)]="displayData.PageNumber" nzBordered
+    [nzLoading]="loading" [nzTotal]="total" (nzQueryParams)="onQueryParamsChange($event)" [nzShowTotal]="rangeTemplate"
+    nzSize="small">
+    <ng-template #rangeTemplate let-range="range" let-total>
+      {{range[0]}}-{{range[1]}} của {{total}} bản ghi
+    </ng-template>
+    <thead>
+      <tr>
+        <th nzLeft="0px" nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="customerName" [nzSortFn]="true">
+          Mã đơn hàng
+          <nz-filter-trigger [nzDropdownMenu]="menu1">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu1="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('customerName',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+
+        <th nzLeft="100px" nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="customerName" [nzSortFn]="true">
+          Tên khách hàng
+          <nz-filter-trigger [nzDropdownMenu]="menu1">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu1="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('customerName',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+  
+        <th nzLeft="250px" nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="customerAddress" [nzSortFn]="true">
+          Địa chỉ
+          <nz-filter-trigger [nzDropdownMenu]="menu2">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu2="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('customerAddress',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+  
+        <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="customerEmail" [nzSortFn]="true">
+            Email
+          <nz-filter-trigger [nzDropdownMenu]="menu3">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu3="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('customerEmail',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+  
+        <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="customerMobile" [nzSortFn]="true">
+          SĐT
+          <nz-filter-trigger [nzDropdownMenu]="menu4">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu4="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('customerMobile',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+  
+        <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="order_PurchaseTime" [nzSortFn]="true">
+            Ngày mua
+        </th>
+  
+        <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="order_Amount" [nzSortFn]="true">
+            Tổng giá trị
+          <nz-filter-trigger [nzDropdownMenu]="menu6">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger>
+          <nz-dropdown-menu #menu6="nzDropdownMenu">
+            <div class="ant-table-filter-dropdown">
+              <div class="search-box">
+                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
+                  (ngModelChange)="onChangeSearch('order_Amount',$event)" />
+              </div>
+            </div>
+          </nz-dropdown-menu>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr (click)="getOrderDetailsByOrderId(data)" *ngFor="let data of fixedTable.data; let i = index">
+        <td nzLeft="0px" nzWidth="100px" nzAlign="center">{{ data?.order_Id}}</td>
+        <td nzLeft="100px" nzWidth="150px" nzAlign="center">{{ data?.customerName}}</td>
+        <td nzLeft="250px" nzWidth="200px" nzAlign="center">{{ data?.customerAddress }}</td>
+        <td nzWidth="150px" nzAlign="center">{{ data?.customerEmail }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.customerMobile }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.order_PurchaseTime | date:'dd/MM/yyyy' }}</td>
+        <td nzWidth="100px" nzAlign="center">{{ data?.order_Amount }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  

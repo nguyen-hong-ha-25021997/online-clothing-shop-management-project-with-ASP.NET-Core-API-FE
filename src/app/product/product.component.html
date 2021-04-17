@@ -1,198 +1,59 @@
-<div nz-row style="margin-top: 3px; margin-bottom: 1px;">
-  <div nz-col nzSpan="4" style="text-align: left; padding-left: 3px;">
-    <button style="float:left" nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
-      <i nz-icon nzType="plus"></i>Thêm</button>
+<div nz-row>
+  <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+    <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
   </div>
-
-  <div nz-col nzSpan="8" style="text-align: left;">
-    <div style="float:right">
-      <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.fromDate"
-      placeholder="Từ" />
-      <input nzSize="small"  style="width: 150px;margin-left: 2px;"  type="date" nz-input [(ngModel)]="displayData.toDate"
-      placeholder="Đến" />
-      <button nz-button nzSize="small" nzType="primary" style="margin-left: 2px;" (click)="filterTable()">
-        <i nz-icon nzType="search" nzTheme="outline"></i>Lấy dữ liệu</button>
-    </div>
-  </div>
-
-  <div nz-col nzSpan="12" style="text-align: right;">
-    <div style="float:right;padding-left: 5px">
-      <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
-        <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
-          placeholder="Tìm kiếm" />
-        <ng-template #suffixIconSearch>
-          <i nz-icon nzType="search"></i>
-        </ng-template>
-      </nz-input-group>
-    </div>
+  <div style="text-align: left;" nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+    <button nz-button nzSize="small" nzType="primary" (click)="addNewItem()">
+      <i nz-icon nzType="plus"></i>Thêm mới</button>
   </div>
 </div>
-<nz-table [nzScroll]="{ x: '1325px'}" #fixedTable nzSize="small" nzBordered nzShowSizeChanger
-  [nzFrontPagination]="false" [nzData]="listOfData" nzShowQuickJumper="true" [(nzPageSize)]="displayData.PageSize"
-  nzShowTotal [nzPageSizeOptions]="pageSizeOptions" [(nzPageIndex)]="displayData.PageNumber" nzBordered
-  [nzLoading]="loading" [nzTotal]="total" (nzQueryParams)="onQueryParamsChange($event)" [nzShowTotal]="rangeTemplate"
-  nzSize="small">
-  <ng-template #rangeTemplate let-range="range" let-total>
-    {{range[0]}}-{{range[1]}} của {{total}} bản ghi
-  </ng-template>
-  <thead>
-    <tr>
-      <th nzLeft="0px" nzWidth="50px" nzAlign="center">STT</th>
-      <th nzLeft="50px" nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="product_Name" [nzSortFn]="true">Tên sản phẩm
-        <nz-filter-trigger [nzDropdownMenu]="menu1">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu1="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Name',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzLeft="200px" nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="category_Name" [nzSortFn]="true">
-        Loại sản phẩm
-        <nz-filter-trigger [nzDropdownMenu]="menu2">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu2="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('category_Name',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzLeft="350px" nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="product_Style" [nzSortFn]="true">Kiểu
-        <nz-filter-trigger [nzDropdownMenu]="menu3">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu3="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Style',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzLeft="450px" nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="product_Size" [nzSortFn]="true">
-        Kích cỡ
-        <nz-filter-trigger [nzDropdownMenu]="menu4">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu4="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Size',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="product_Image" [nzSortFn]="true">Ảnh
-        <nz-filter-trigger [nzDropdownMenu]="menu5">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu5="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Image',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="product_Show" [nzSortFn]="true">Mã hiển thị
-        <nz-filter-trigger [nzDropdownMenu]="menu6">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu6="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Show',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="product_Price" [nzSortFn]="true">Giá
-        <nz-filter-trigger [nzDropdownMenu]="menu7">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu7="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Price',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="product_Quantity" [nzSortFn]="true">Số lượng tồn
-        <nz-filter-trigger [nzDropdownMenu]="menu8">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu8="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Quantity',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="product_Note" [nzSortFn]="true">Ghi chú
-        <nz-filter-trigger [nzDropdownMenu]="menu9">
-          <i nz-icon nzType="search"></i>
-        </nz-filter-trigger>
-        <nz-dropdown-menu #menu9="nzDropdownMenu">
-          <div class="ant-table-filter-dropdown">
-            <div class="search-box">
-              <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                (ngModelChange)="onChangeSearch('product_Note',$event)" />
-            </div>
-          </div>
-        </nz-dropdown-menu>
-      </th>
-
-      <th nzWidth="75px" nzRight nzAlign="center">Thao tác</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of fixedTable.data; let i = index">
-      <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
-      <td nzLeft="50px" nzWidth="150px" nzAlign="center">{{ data?.product_Name}}</td>
-      <td nzLeft="200px" nzWidth="150px" nzAlign="center">{{ data?.category_Name}}</td>
-      <td nzLeft="350px" nzWidth="100px" nzAlign="center">{{ data?.product_Style }}</td>
-      <td nzLeft="450px" nzWidth="100px" nzAlign="center">{{ data?.product_Size }}</td>
-      <td nzWidth="150px" nzAlign="center"><a (click)="openImage(createImgPath(data?.product_Image))"><img [src]="createImgPath(data?.product_Image)" alt="profile picture" style="width:80px; height:100px;"></a></td>
-      <td nzWidth="150px" nzAlign="center">{{ data?.product_Show }}</td>
-      <td nzWidth="100px" nzAlign="center">{{ data?.product_Price }}</td>
-      <td nzWidth="100px" nzAlign="center">{{ data?.product_Quantity }}</td>
-      <td nzWidth="100px" nzAlign="center">{{ data?.product_Note }}</td>
-
-      <td nzWidth="75px" nzRight nzAlign="center">
-        <nz-button-group nzSize="small">
-          <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">
-            <i nz-icon nzType="edit"></i>
-          </button>
-          &nbsp;
-          <button nz-button nzDanger nzType="primary" (click)="removeItem(data.product_Id)" nz-tooltip nzTooltipTitle="Xóa">
-            <i nz-icon nzType="delete"></i>
-          </button>
-        </nz-button-group>
-      </td>
-    </tr>
-  </tbody>
-</nz-table>
+<br />
+  <div >
+    <nz-table [nzScroll]="{ x: '1325px'}" #fixedTable [nzData]="listOfData" nzSize="small" [nzLoading]="loading" nzBordered="true">
+      <thead>
+        <tr>
+          <th nzLeft="0px" nzAlign="center" nzWidth="50px">STT</th>
+          <th nzLeft="50px" nzAlign="center" nzWidth="150px">Tên sản phẩm</th>
+          <th nzAlign="center" nzWidth="150px">Loại sản phẩm</th>
+          <th nzAlign="center" nzWidth="100px">Kiểu</th>
+          <th nzAlign="center" nzWidth="75px">Kích cỡ</th>
+          <th nzAlign="center" nzWidth="150px">Ảnh</th>
+          <th nzAlign="center" nzWidth="100px">Mã hiển thị</th>
+          <th nzAlign="center" nzWidth="100px">Giá</th>
+          <th nzAlign="center" nzWidth="75px">Số lượng</th>
+          <th nzAlign="center" nzWidth="100px">Ghi chú</th>
+          <th nzWidth="75px" nzRight nzAlign="center">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of fixedTable.data; let i = index">
+          <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
+          <td nzLeft="50px" nzWidth="150px" nzAlign="center">{{ data.product_Name }}</td>
+          <td nzAlign="center">{{ data.category_Name }}</td>
+          <td nzAlign="center">{{ data.product_Style }}</td>
+          <td nzAlign="center">{{ data.product_Size }}</td>
+          <td nzAlign="center"><a (click)="openImage(createImgPath(data?.product_Image))"><img [src]="createImgPath(data?.product_Image)" alt="profile picture" style="width:80px; height:100px;"></a></td>
+          <td nzAlign="center">{{ data.product_Show }}</td>
+          <td nzAlign="center">{{ data.product_Price }}</td>
+          <td nzAlign="center">{{ data.product_Quantity }}</td>
+          <td nzAlign="center">{{ data.product_Note }}</td>
+          <td nzAlign="left" nzRight>
+            <nz-button-group nzSize="small">
+              <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">
+                <i nz-icon nzType="edit"></i>
+              </button>
+              &nbsp;
+              <button nz-button nzDanger nzType="primary" (click)="removeItem(data.category_Id)" nz-tooltip nzTooltipTitle="Xóa">
+                <i nz-icon nzType="delete"></i>
+              </button>
+            </nz-button-group>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+</div>
