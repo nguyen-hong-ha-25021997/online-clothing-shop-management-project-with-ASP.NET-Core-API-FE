@@ -3,7 +3,7 @@
       [nzTrigger]="null">
       <div class="sidebar-logo">
           <a href="" target="_blank">
-              <img src="../../assets/img/images-logo-4Teen.png" alt="logo">
+              <img src="../../assets/img/LOGO_KTX.png" alt="logo">
               <!-- <h1>Ant Design Of Angular</h1> -->
           </a>
       </div>
@@ -28,7 +28,19 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-        <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="toggleCollapsed()"></i>
+        <div style="display: flex; align-items: center;">
+            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="toggleCollapsed()"></i>
+        <div id="marquee" style="float: right; width: 70%;">
+            <marquee id="marqueerun" behavior="scroll" direction="left" onmouseout="this.start()"
+                onmouseover="this.stop()"
+                style="vertical-align: bottom;font-weight:bold; color: red;text-transform: uppercase;   ">
+                <span id="marqueeContent">
+
+                </span>
+            </marquee>
+        </div>
+        </div>
+        
       </nz-header>
     <nz-content>
         <div class="inner-content">

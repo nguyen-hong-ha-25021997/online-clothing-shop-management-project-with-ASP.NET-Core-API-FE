@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { LoginService } from 'src/share/login.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService,
   ) { }
 
   ngOnInit(){
@@ -23,13 +25,15 @@ export class LoginComponent implements OnInit {
 
   public login() {
     this.loginService.login(this.userName, this.password).subscribe((response: any) => {
-      alert('Đăng nhập thành công!');
+      this.message.success('Đăng nhập thành công');
+      // alert('Đăng nhập thành công!');
       localStorage.clear();
       localStorage.setItem('token', response.token);
       localStorage.setItem('currentUser', JSON.stringify(response.model))
       this.router.navigate(['/layout']);
     }, (error) => {
-      alert('Sai tài khoản hoặc mật khẩu!');
+      this.message.error('Sai tài khoản hoặc mật khẩu!');
+    //  alert('Sai tài khoản hoặc mật khẩu!');
       localStorage.clear();
     });
   }

@@ -1,0 +1,29 @@
+<img class="wave" src="assets/img/wave.png">
+<div class="container">
+    <div class="img">
+        <img src="assets/img/manager.svg">
+    </div>
+    <div class="login-content">
+        <div action="index.html">
+            <img src="assets/img/avatar.svg">
+            <h2 class="title">Welcome</h2>
+            <form nz-form [formGroup]="registerFrom" class="login-form">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your username!">
+                        <nz-input-group nzPrefixIcon="user">
+                            <input type="text" nz-input formControlName="userName" placeholder="Username" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your Password!">
+                        <nz-input-group nzPrefixIcon="lock">
+                            <input type="password" nz-input formControlName="password" placeholder="Password" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+            <button type="submit" class="btn" (click)="submitForm()">Login</button>
+        </div>
+    </div>
+</div>

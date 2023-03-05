@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/share/account.service';
 
 @Component({
@@ -8,28 +8,41 @@ import { AccountService } from 'src/share/account.service';
   styleUrls: ['./create-account.component.scss']
 })
 export class CreateAccountComponent implements OnInit {
-
+  registerFrom: FormGroup;
   public accounts = {
     userName: '',
-    passwword:'',
+    passWord:'',
     confirmPassword:'',
     email: '',
     phone:''
   }
-  constructor(public dialogRef: MatDialogRef<CreateAccountComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private accountService: AccountService ) { }
+  constructor(
+    private accountService: AccountService,
+    private fb: FormBuilder ) { }
 
   ngOnInit(): void {
+  }
+
+  CreateForm() {
+    this.registerFrom = this.fb.group({
+      userName: [null, [Validators.required]],
+      passWord: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      phone: [null, [Validators.required]],
+    });
   }
 
   public createAccount() {
     this.accountService.postAccounts(this.accounts).subscribe((response: any) => {
       alert('Thêm mới thành công');
-      this.dialogRef.close(true);
     }, (error) => {
       console.log(this.accounts)
       alert('Thêm mới không thành công ');
     });
+  }
+
+  submitForm() {
+
   }
 }

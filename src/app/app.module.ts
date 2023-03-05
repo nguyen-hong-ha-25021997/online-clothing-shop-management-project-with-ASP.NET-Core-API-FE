@@ -6,14 +6,11 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryModalComponent } from './category/category-modal/category-modal.component';
-import { LayoutComponent } from './layout/layout.component';
 import { CategoriesService } from 'src/share/category.service';
 import { AccountComponent } from './account/account.component';
-import { CreateAccountComponent } from './account/create-account/create-account.component';
 import { UpdateAccountComponent } from './account/update-account/update-account.component';
 import { AccountService } from 'src/share/account.service';
 import { ProductsService } from 'src/share/product.service';
@@ -72,11 +69,17 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ChartModule } from '@syncfusion/ej2-angular-charts';
+import { AccumulationChartAllModule, ChartModule, RangeNavigatorAllModule } from '@syncfusion/ej2-angular-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
 import { ProductModalComponent } from './product/product-modal/product-modal.component';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
+import { LoginComponent } from './login/login.component';
+import { CreateAccountComponent } from './account/create-account/create-account.component';
+import { LayoutComponent } from './layout/layout.component';
+import { DashbroadComponent } from './layout/dashbroad/dashbroad.component';
+import { CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
+  SplineAreaSeriesService, MultiColoredLineSeriesService, ParetoSeriesService, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -97,6 +100,7 @@ export function tokenGetter() {
     OrderdetailComponent,
     UploadComponent,
     ProductModalComponent,
+    DashbroadComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -148,7 +152,8 @@ export function tokenGetter() {
     NzResultModule,
     NzCollapseModule,
     NzStatisticModule,
-
+    AccumulationChartAllModule,
+    RangeNavigatorAllModule,
     NgxSpinnerModule,
     ChartModule,
     BrowserAnimationsModule,
@@ -164,7 +169,9 @@ export function tokenGetter() {
   
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    CategoriesService, AccountService, ProductsService, OrderDetailsService, OrdersService],
+    CategoriesService, AccountService, ProductsService, OrderDetailsService, OrdersService,
+    CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
+    SplineAreaSeriesService, MultiColoredLineSeriesService, ParetoSeriesService, ColumnSeriesService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

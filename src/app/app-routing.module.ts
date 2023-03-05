@@ -1,3 +1,4 @@
+import { DashbroadComponent } from './layout/dashbroad/dashbroad.component';
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from 'src/app/login/login.component';
@@ -8,12 +9,18 @@ import { AccountComponent } from './account/account.component';
 import { ProductComponent } from './product/product.component';
 import { OrderComponent } from './order/order.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
+import { CreateAccountComponent } from './account/create-account/create-account.component';
 
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    children: []
+  },
+  {
+    path: 'register',
+    component: CreateAccountComponent,
     children: []
   },
   {
@@ -39,6 +46,10 @@ const routes: Routes = [
       {
         path: 'orderdetail',
         component: OrderdetailComponent,
+      },
+      {
+        path: 'dash-broad',
+        component: DashbroadComponent,
       },
     ]
   },

@@ -19,14 +19,14 @@
           <tr>
             <th nzAlign="center" nzWidth="10%">STT</th>
             <th nzAlign="center" nzWidth="30%">Loại sản phẩm</th>
-            <th nzAlign="center" nzWidth="20%">Số lượng</th>
+            <!-- <th nzAlign="center" nzWidth="20%">Số lượng</th> -->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of basicTable.data; let i = index">
             <td nzAlign="center">{{ i + 1 }}</td>
             <td nzAlign="center">{{ data.category_Name }}</td>
-            <td nzAlign="center" style="text-align: right !important;">{{ data.category_Quantity }}</td>
+            <!-- <td nzAlign="center" style="text-align: right !important;">{{ data.category_Quantity }}</td> -->
             <td nzAlign="left">
               <nz-button-group nzSize="small">
                 <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">

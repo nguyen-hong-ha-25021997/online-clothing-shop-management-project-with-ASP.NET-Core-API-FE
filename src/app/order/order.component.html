@@ -33,98 +33,35 @@
     </ng-template>
     <thead>
       <tr>
-        <th nzLeft="0px" nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="customerName" [nzSortFn]="true">
+        <th nzLeft="0px" nzWidth="100px" nzAlign="center">
           Mã đơn hàng
-          <nz-filter-trigger [nzDropdownMenu]="menu1">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-          <nz-dropdown-menu #menu1="nzDropdownMenu">
-            <div class="ant-table-filter-dropdown">
-              <div class="search-box">
-                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                  (ngModelChange)="onChangeSearch('customerName',$event)" />
-              </div>
-            </div>
-          </nz-dropdown-menu>
         </th>
 
-        <th nzLeft="100px" nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="customerName" [nzSortFn]="true">
+        <th nzLeft="100px" nzWidth="150px" nzAlign="center">
           Tên khách hàng
-          <nz-filter-trigger [nzDropdownMenu]="menu1">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-          <nz-dropdown-menu #menu1="nzDropdownMenu">
-            <div class="ant-table-filter-dropdown">
-              <div class="search-box">
-                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                  (ngModelChange)="onChangeSearch('customerName',$event)" />
-              </div>
-            </div>
-          </nz-dropdown-menu>
         </th>
   
-        <th nzLeft="250px" nzWidth="200px" nzAlign="center" nzCustomFilter nzColumnKey="customerAddress" [nzSortFn]="true">
+        <th nzLeft="250px" nzWidth="200px" nzAlign="center" n>
           Địa chỉ
-          <nz-filter-trigger [nzDropdownMenu]="menu2">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-          <nz-dropdown-menu #menu2="nzDropdownMenu">
-            <div class="ant-table-filter-dropdown">
-              <div class="search-box">
-                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                  (ngModelChange)="onChangeSearch('customerAddress',$event)" />
-              </div>
-            </div>
-          </nz-dropdown-menu>
         </th>
   
-        <th nzWidth="150px" nzAlign="center" nzCustomFilter nzColumnKey="customerEmail" [nzSortFn]="true">
+        <th nzWidth="150px" nzAlign="center">
             Email
-          <nz-filter-trigger [nzDropdownMenu]="menu3">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-          <nz-dropdown-menu #menu3="nzDropdownMenu">
-            <div class="ant-table-filter-dropdown">
-              <div class="search-box">
-                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                  (ngModelChange)="onChangeSearch('customerEmail',$event)" />
-              </div>
-            </div>
-          </nz-dropdown-menu>
+       
         </th>
   
-        <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="customerMobile" [nzSortFn]="true">
+        <th nzWidth="100px" nzAlign="center" >
           SĐT
-          <nz-filter-trigger [nzDropdownMenu]="menu4">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-          <nz-dropdown-menu #menu4="nzDropdownMenu">
-            <div class="ant-table-filter-dropdown">
-              <div class="search-box">
-                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                  (ngModelChange)="onChangeSearch('customerMobile',$event)" />
-              </div>
-            </div>
-          </nz-dropdown-menu>
+         
         </th>
   
-        <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="order_PurchaseTime" [nzSortFn]="true">
+        <th nzWidth="100px" nzAlign="center" >
             Ngày mua
         </th>
   
-        <th nzWidth="100px" nzAlign="center" nzCustomFilter nzColumnKey="order_Amount" [nzSortFn]="true">
+        <th nzWidth="100px" nzAlign="center" >
             Tổng giá trị
-          <nz-filter-trigger [nzDropdownMenu]="menu6">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-          <nz-dropdown-menu #menu6="nzDropdownMenu">
-            <div class="ant-table-filter-dropdown">
-              <div class="search-box">
-                <input type="text" nz-input placeholder="..." [(ngModel)]="searchValue"
-                  (ngModelChange)="onChangeSearch('order_Amount',$event)" />
-              </div>
-            </div>
-          </nz-dropdown-menu>
+         
         </th>
       </tr>
     </thead>
