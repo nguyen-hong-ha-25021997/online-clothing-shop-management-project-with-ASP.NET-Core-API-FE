@@ -1,7 +1,8 @@
 <div nz-row>
   <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
     <nz-input-group nzSize="small" [nzSuffix]="suffixIconSearch">
-      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input placeholder="Tìm kiếm" />
+      <input type="text" [(ngModel)]="valueModel" (ngModelChange)="changeSearch($event)" nz-input
+        placeholder="Tìm kiếm" />
     </nz-input-group>
     <ng-template #suffixIconSearch>
       <i nz-icon nzType="search"></i>
@@ -13,47 +14,51 @@
   </div>
 </div>
 <br />
-  <div >
-    <nz-table [nzScroll]="{ x: '1325px'}" #fixedTable [nzData]="listOfData" nzSize="small" [nzLoading]="loading" nzBordered="true">
-      <thead>
-        <tr>
-          <th nzLeft="0px" nzAlign="center" nzWidth="50px">STT</th>
-          <th nzLeft="50px" nzAlign="center" nzWidth="150px">Tên sản phẩm</th>
-          <th nzAlign="center" nzWidth="150px">Loại sản phẩm</th>
-          <th nzAlign="center" nzWidth="100px">Kiểu</th>
-          <th nzAlign="center" nzWidth="75px">Kích cỡ</th>
-          <th nzAlign="center" nzWidth="150px">Ảnh</th>
-          <th nzAlign="center" nzWidth="100px">Mã hiển thị</th>
-          <th nzAlign="center" nzWidth="100px">Giá</th>
-          <th nzAlign="center" nzWidth="75px">Số lượng</th>
-          <th nzAlign="center" nzWidth="100px">Ghi chú</th>
-          <th nzWidth="75px" nzRight nzAlign="center">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of fixedTable.data; let i = index">
-          <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
-          <td nzLeft="50px" nzWidth="150px" nzAlign="center">{{ data.product_Name }}</td>
-          <td nzAlign="center">{{ data.category_Name }}</td>
-          <td nzAlign="center">{{ data.product_Style }}</td>
-          <td nzAlign="center">{{ data.product_Size }}</td>
-          <td nzAlign="center"><a (click)="openImage(createImgPath(data?.product_Image))"><img [src]="createImgPath(data?.product_Image)" alt="profile picture" style="width:80px; height:100px;"></a></td>
-          <td nzAlign="center">{{ data.product_Show }}</td>
-          <td nzAlign="center">{{ data.product_Price }}</td>
-          <td nzAlign="center">{{ data.product_Quantity }}</td>
-          <td nzAlign="center">{{ data.product_Note }}</td>
-          <td nzAlign="left" nzRight>
-            <nz-button-group nzSize="small">
-              <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">
-                <i nz-icon nzType="edit"></i>
-              </button>
-              &nbsp;
-              <button nz-button nzDanger nzType="primary" (click)="removeItem(data.category_Id)" nz-tooltip nzTooltipTitle="Xóa">
-                <i nz-icon nzType="delete"></i>
-              </button>
-            </nz-button-group>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
+<div>
+  <nz-table [nzScroll]="{ x: '1325px'}" #fixedTable [nzData]="listOfData" nzSize="small" [nzLoading]="loading"
+    nzBordered="true">
+    <thead>
+      <tr>
+        <th nzLeft="0px" nzAlign="center" nzWidth="50px">STT</th>
+        <th nzLeft="50px" nzAlign="center" nzWidth="150px">Tên sản phẩm</th>
+        <th nzAlign="center" nzWidth="150px">Loại sản phẩm</th>
+        <th nzAlign="center" nzWidth="100px">Đơn vị tính</th>
+        <!-- <th nzAlign="center" nzWidth="75px">Thông tin sản phẩm</th> -->
+        <th nzAlign="center" nzWidth="150px">Ảnh</th>
+        <!-- <th nzAlign="center" nzWidth="100px">Mã hiển thị</th> -->
+        <th nzAlign="center" nzWidth="100px">Giá</th>
+        <th nzAlign="center" nzWidth="75px">Số lượng</th>
+        <th nzAlign="center" nzWidth="100px">Ghi chú</th>
+        <th nzWidth="75px" nzRight nzAlign="center">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of fixedTable.data; let i = index">
+        <td nzLeft="0px" nzWidth="50px" nzAlign="center">{{ i + 1 }}</td>
+        <td nzLeft="50px" nzWidth="150px" nzAlign="center">{{ data.product_Name }}</td>
+        <td nzAlign="center">{{ data.category_Name }}</td>
+        <td nzAlign="center">{{ data.product_Unit }}</td>
+        <!-- <td nzAlign="center">{{ data.product_Detail }}</td> -->
+        <td nzAlign="center"><a (click)="openImage(createImgPath(data?.product_Image))"><img
+              [src]="createImgPath(data?.product_Image)" alt="profile picture" style="width:80px; height:100px;"></a>
+        </td>
+        <!-- <td nzAlign="center">{{ data.product_Show }}</td> -->
+        <td nzAlign="center">{{ data.product_Price }}</td>
+        <td nzAlign="center">{{ data.product_Quantity }}</td>
+        <td nzAlign="center">{{ data.product_Note }}</td>
+        <td nzAlign="left" nzRight>
+          <nz-button-group nzSize="small">
+            <button nz-button nzType="primary" (click)="editItem(data, i)" nz-tooltip nzTooltipTitle="Sửa">
+              <i nz-icon nzType="edit"></i>
+            </button>
+            &nbsp;
+            <button nz-button nzDanger nzType="primary" (click)="removeItem(data.category_Id)" nz-tooltip
+              nzTooltipTitle="Xóa">
+              <i nz-icon nzType="delete"></i>
+            </button>
+          </nz-button-group>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>

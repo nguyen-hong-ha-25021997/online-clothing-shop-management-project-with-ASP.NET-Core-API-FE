@@ -8,17 +8,16 @@ import { CategoriesService } from 'src/share/category.service';
 @Component({
   selector: 'app-product-modal',
   templateUrl: './product-modal.component.html',
-  styleUrls: ['./product-modal.component.scss']
+  styleUrls: ['./product-modal.component.scss'],
 })
 export class ProductModalComponent implements OnInit {
-
   @Input() isAddNew: boolean;
   @Input() data: any;
   myFormGroup: FormGroup;
-  categories: any[] = []
-  
-  isUpload=false;
-  public response:{dbPath:''};
+  categories: any[] = [];
+
+  isUpload = false;
+  public response: { dbPath: '' };
   public progress: number;
   public uploadmessage: string;
 
@@ -29,24 +28,24 @@ export class ProductModalComponent implements OnInit {
     private modal: NzModalRef,
     private productsv: ProductsService,
     private categorysv: CategoriesService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.categorysv.getCategories().subscribe((rs:any) =>{
+    this.categorysv.getCategories().subscribe((rs: any) => {
       this.categories = rs;
-    })
-    if(this.isAddNew) {
+    });
+    if (this.isAddNew) {
       this.createAddForm();
     } else {
-      console.log(this.data)
+      console.log(this.data);
       this.createUpdateForm();
       this.myFormGroup.patchValue({
-        ...this.data
+        ...this.data,
       });
     }
   }
   saveChanges() {
-    if(this.myFormGroup.invalid) {
+    if (this.myFormGroup.invalid) {
       for (const i in this.myFormGroup.controls) {
         this.myFormGroup.controls[i].markAsDirty();
         this.myFormGroup.controls[i].updateValueAndValidity();
@@ -57,38 +56,38 @@ export class ProductModalComponent implements OnInit {
     if (this.isAddNew === true) {
       // console.log('api insert');
       this.myFormGroup.get('product_Image').setValue(this.response.dbPath);
-      this.productsv.postProducts(this.myFormGroup.value).subscribe((rs: any) => {
-        if (rs === 1) {
-          this.modal.destroy(rs);
-          this.message.create('success', `Thêm sản phẩm thành công`);
+      this.productsv
+        .postProducts(this.myFormGroup.value)
+        .subscribe((rs: any) => {
+          if (rs === 1) {
+            this.modal.destroy(rs);
+            this.message.create('success', `Thêm sản phẩm thành công`);
 
-          // console.log(rs);
-        } else {
-          this.message.create('error', `Thêm thông tin không thành công`);
-          this.modal.destroy(rs);
-          // console.log(rs);
-        }
-      });
-    }
-    else {
-      if(this.isUpload){
+            // console.log(rs);
+          } else {
+            this.message.create('error', `Thêm thông tin không thành công`);
+            this.modal.destroy(rs);
+            // console.log(rs);
+          }
+        });
+    } else {
+      if (this.isUpload) {
         this.myFormGroup.get('product_Image').setValue(this.response.dbPath);
       }
-      console.log(this.myFormGroup)
-      this.productsv.putProducts(this.myFormGroup.getRawValue()).subscribe(
-        (result: any) => {
+      console.log(this.myFormGroup);
+      this.productsv
+        .putProducts(this.myFormGroup.getRawValue())
+        .subscribe((result: any) => {
           if (result === 1) {
             // console.log(result);
             this.message.create('success', `Cập nhật thông tin thành công`);
             this.modal.destroy(result);
-            
           } else {
             this.message.create('error', `Sửa thông tin không thành công`);
             // console.log(result);
             this.modal.destroy(result);
           }
-        }
-      );
+        });
     }
     //const myFormGroupData = this.myFormGroup.getRawValue();
     //this.modelRef.destroy(myFormGroupData);
@@ -96,7 +95,7 @@ export class ProductModalComponent implements OnInit {
 
   changeNhaCungCap(event: any) {
     if (this.myFormGroup.get(`category_Id`).dirty) {
-      const data = this.categories.find(x => x.category_Id === event);
+      const data = this.categories.find((x) => x.category_Id === event);
       this.myFormGroup.get('category_Name').setValue(data.category_Name);
     }
   }
@@ -106,11 +105,11 @@ export class ProductModalComponent implements OnInit {
       category_Id: [0],
       category_Name: [null],
       product_Name: [null],
-      product_Style: [null],
-      product_Size: [null],
+      product_Unit: [null],
+      product_Detail: [null],
       product_Image: [null],
       product_Price: [0],
-      product_Show: [null],
+      //product_Show: [null],
       product_Quantity: [0],
       product_Note: [null],
     });
@@ -121,11 +120,11 @@ export class ProductModalComponent implements OnInit {
       category_Id: [0],
       category_Name: [null],
       product_Name: [null],
-      product_Style: [null],
-      product_Size: [null],
+      product_Unit: [null],
+      product_Detail: [null],
       product_Image: [null],
       product_Price: [0],
-      product_Show: [null],
+      //product_Show: [null],
       product_Quantity: [0],
       product_Note: [null],
     });
@@ -135,8 +134,8 @@ export class ProductModalComponent implements OnInit {
     this.modelRef.destroy(null);
   }
 
-  uploadFinished = (event) =>{
+  uploadFinished = (event) => {
     this.response = event;
     this.isUpload = true;
-  }
+  };
 }
