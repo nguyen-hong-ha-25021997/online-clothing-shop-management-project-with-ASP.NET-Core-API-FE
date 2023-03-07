@@ -161,6 +161,6 @@ export class ProductComponent implements OnInit {
   }
 
   public createImgPath = (serverPath: string) => {
-    return `https://localhost:44342/${serverPath}`;
+    return `https://localhost:44342/Resources/Images/${serverPath}`;
   };
 }

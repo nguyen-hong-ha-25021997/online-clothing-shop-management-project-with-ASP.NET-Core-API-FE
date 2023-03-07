@@ -11,29 +11,28 @@ import { SharedService } from 'src/share/shared.service';
 @Component({
   selector: 'app-orderdetail',
   templateUrl: './orderdetail.component.html',
-  styleUrls: ['./orderdetail.component.scss']
+  styleUrls: ['./orderdetail.component.scss'],
 })
 export class OrderdetailComponent implements OnInit {
-
-  orderData:any
+  orderData: any;
   pageSizeOptions: any[];
   listOfData: any[] = [];
   listOfDatatmp: any[] = [];
   loading: boolean;
   valueModel = '';
-  searchValue="";
+  searchValue = '';
 
-  total:any;
+  total: any;
   displayData: PagingParams = {
     PageNumber: 1,
     PageSize: 5,
     Keyword: '',
     SortKey: '',
     SortValue: '',
-    fromDate: "",
-    toDate: "",
-    KeywordCol: "",
-    ColName: "",
+    fromDate: '',
+    toDate: '',
+    KeywordCol: '',
+    ColName: '',
   };
   public token;
   public search = '';
@@ -42,7 +41,7 @@ export class OrderdetailComponent implements OnInit {
   public currentPermission = {
     Create: true,
     Update: true,
-    Delete: true
+    Delete: true,
   };
 
   constructor(
@@ -50,26 +49,27 @@ export class OrderdetailComponent implements OnInit {
     private orderService: OrdersService,
     private sharedService: SharedService,
     public jwtHelper: JwtHelperService
-  ) {this.token = this.jwtHelper.decodeToken(localStorage.getItem('token'));
- }
+  ) {
+    this.token = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+  }
 
   ngOnInit() {
-    this.displayData.fromDate = moment().startOf("month").format("YYYY-MM-DD");
-    this.displayData.toDate = moment().format("YYYY-MM-DD");
-    this.perssions = this.token.Permission.substring(1, this.token.Permission.length - 1);
-    this.perssions = this.perssions.split(", ");
+    this.displayData.fromDate = moment().startOf('month').format('YYYY-MM-DD');
+    this.displayData.toDate = moment().format('YYYY-MM-DD');
+    this.perssions = this.token.Permission.substring(
+      1,
+      this.token.Permission.length - 1
+    );
+    this.perssions = this.perssions.split(', ');
 
-    this.perssions.forEach(element => {
-      if (element == "orderdetail.Create")
-        this.currentPermission.Create = true;
+    this.perssions.forEach((element) => {
+      if (element == 'orderdetail.Create') this.currentPermission.Create = true;
 
-      if (element == "orderdetail.Update")
-        this.currentPermission.Update = true;
+      if (element == 'orderdetail.Update') this.currentPermission.Update = true;
 
-      if (element == "orderdetail.Delete")
-        this.currentPermission.Delete = true;
+      if (element == 'orderdetail.Delete') this.currentPermission.Delete = true;
     });
-    this.sharedService.currentData.subscribe(data => this.orderData = data);
+    this.sharedService.currentData.subscribe((data) => (this.orderData = data));
   }
 
   filterTable() {
@@ -78,7 +78,7 @@ export class OrderdetailComponent implements OnInit {
 
   onQueryParamsChange(params: NzTableQueryParams): void {
     const { pageSize, pageIndex, sort, filter } = params;
-    const currentSort = sort.find(item => item.value !== null);
+    const currentSort = sort.find((item) => item.value !== null);
     const sortField = (currentSort && currentSort.key) || null;
     const sortOrder = (currentSort && currentSort.value) || null;
     // console.log(pageIndex, pageSize, sortField, sortOrder, filter);
@@ -86,8 +86,8 @@ export class OrderdetailComponent implements OnInit {
     // this.displayData.PageNumber = pageIndex;
     const sortconst: any = {
       key: sortField,
-      value: sortOrder
-    }
+      value: sortOrder,
+    };
     //his.sort(sortconst);
     if (sortField != null && sortOrder != null) {
       this.sort(sortconst);
@@ -109,12 +109,21 @@ export class OrderdetailComponent implements OnInit {
   }
 
   changeSearch(event: any) {
-    const arrCondition = ['order_Id','product_Name','product_Style','product_Size','product_Image','product_Price','orderDetail_Quantity','orderDetail_Amount'];
+    const arrCondition = [
+      'order_Id',
+      'product_Name',
+      'product_Style',
+      'product_Size',
+      'product_Image',
+      'product_Price',
+      'orderDetail_Quantity',
+      'orderDetail_Amount',
+    ];
     this.listOfData = SearchEngine(this.listOfDatatmp, arrCondition, event);
   }
 
-  onChangeSearch(cont,event: any) {
-    const arrCondition =[];
+  onChangeSearch(cont, event: any) {
+    const arrCondition = [];
     arrCondition.push(cont);
 
     //console.log(arrCondition);
@@ -127,7 +136,7 @@ export class OrderdetailComponent implements OnInit {
   getPageSizeOption() {
     const pageSizeOptions1 = [];
     if (this.total > 5) {
-      for (let index = 5; index < this.total; index = (index * 2)) {
+      for (let index = 5; index < this.total; index = index * 2) {
         pageSizeOptions1.push(index);
         // console.log(pageSizeOptions1);
       }
@@ -140,23 +149,28 @@ export class OrderdetailComponent implements OnInit {
 
   LoadData() {
     this.loading = true;
-    this.orderdetailService.getOrderDetailsPaging(this.displayData, this.orderData).subscribe((rs: any) => {
-      this.listOfDatatmp = rs.items;
-      this.listOfData = rs.items;
-      this.total = rs.totalCount;
-      this.displayData.PageNumber = rs.currentPage;
-      this.getPageSizeOption();
-      this.loading = false;
-    }, _ => {
-      this.loading = false;
-    });
+    this.orderdetailService
+      .getOrderDetailsPaging(this.displayData, this.orderData)
+      .subscribe(
+        (rs: any) => {
+          this.listOfDatatmp = rs.items;
+          this.listOfData = rs.items;
+          this.total = rs.totalCount;
+          this.displayData.PageNumber = rs.currentPage;
+          this.getPageSizeOption();
+          this.loading = false;
+        },
+        (_) => {
+          this.loading = false;
+        }
+      );
   }
 
-  openImage(url){
-    window.open(url)
+  openImage(url) {
+    window.open(url);
   }
 
   public createImgPath = (serverPath: string) => {
-    return `https://localhost:44342/${serverPath}`;
-  }
+    return `https://localhost:44342/Resources/Images/${serverPath}`;
+  };
 }
