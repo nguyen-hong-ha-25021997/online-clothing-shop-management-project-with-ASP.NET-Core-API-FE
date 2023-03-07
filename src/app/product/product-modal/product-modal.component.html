@@ -58,7 +58,16 @@
         <input nz-input nzSize="small" formControlName="product_Note" />
       </nz-form-control>
     </nz-form-item>
-    <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+    <div style="display: flex;">
+      <div style="float: left; width: 30%; margin-left: 50px;">
+        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+      </div>
+      <div nzAlign="center" style="float: right; width: 50%;"><a (click)="openImage(createImgPath(ulrFileAnhInput))"><img
+        [src]="createImgPath(ulrFileAnhInput)" alt="profile picture" style="width:80px; height:100px;"></a>
+        <a (click)="openImage(createImgPath(ulrFileAnhInput))" > {{ulrFileAnhInput}} </a> 
+     </div>
+    </div>
+
   </div>
 </form>
 

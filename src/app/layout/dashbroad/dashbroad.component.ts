@@ -1,3 +1,4 @@
+import { ReportService } from './../../../share/report.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,9 +13,26 @@ export class DashbroadComponent implements OnInit {
   public title: string;
   public legendSettings: Object;
 
-  constructor() { }
+  numberOfProduct: any;
+  profit: any;
+  numberOfOrder: any;
+
+  constructor(
+    private reportService : ReportService
+  ) { }
 
   ngOnInit() {
+
+    this.reportService.getBaoCao().subscribe((rs: any) => {
+      this.chartData = rs;
+    });
+
+    this.reportService.getBaoCaoDaily().subscribe((rs: any) => {
+      this.numberOfProduct = rs.numberOfProduct;
+      this.profit = rs.profit;
+      this.numberOfOrder = rs.numberOfOrder;
+    });
+
     this.chartData = [
       { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
       { month: 'Mar', sales: 34 }, { month: 'Apr', sales: 32 },

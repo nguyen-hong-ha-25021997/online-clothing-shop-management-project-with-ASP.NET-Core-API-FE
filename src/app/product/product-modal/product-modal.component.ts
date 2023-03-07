@@ -20,7 +20,7 @@ export class ProductModalComponent implements OnInit {
   public response: { dbPath: '' };
   public progress: number;
   public uploadmessage: string;
-
+  ulrFileAnhInput: any;
   constructor(
     private modelRef: NzModalRef,
     private fb: FormBuilder,
@@ -42,6 +42,9 @@ export class ProductModalComponent implements OnInit {
       this.myFormGroup.patchValue({
         ...this.data,
       });
+    }
+    if(this.data) {
+      this.ulrFileAnhInput = this.data.product_Image;
     }
   }
   saveChanges() {
@@ -137,5 +140,13 @@ export class ProductModalComponent implements OnInit {
   uploadFinished = (event) => {
     this.response = event;
     this.isUpload = true;
+  };
+
+  openImage(url) {
+    window.open(url);
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44342/Resources/Images/${serverPath}`;
   };
 }

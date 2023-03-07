@@ -30,6 +30,8 @@ export class ProductComponent implements OnInit {
     Delete: true,
   };
 
+  ulrFileAnhInput: '';
+
   constructor(
     private productService: ProductsService,
     private modal: NzModalService,

@@ -313,7 +313,7 @@ public pointRender(args: IAccPointRenderEventArgs): void {
   ngOnInit(){
     this.setResize();
 
-    document.getElementById('marqueeContent').innerHTML = 'Solo yasuo không? Cho bố mày cái địa chỉ'.replace(/<p>/ig, '<span class="marqueechildren">').replace(/<\/p>/ig, '</span>');
+    document.getElementById('marqueeContent').innerHTML = 'Chúc bạn một ngày làm việc may mắn!'.replace(/<p>/ig, '<span class="marqueechildren">').replace(/<\/p>/ig, '</span>');
     document.getElementById('marqueerun').setAttribute('scrollamount', '10px');
 
     let marqueechildren = document.getElementsByClassName('marqueechildren');
@@ -342,5 +342,9 @@ public pointRender(args: IAccPointRenderEventArgs): void {
   {
     localStorage.clear();
     this.router.navigate(['/login']);
+  }
+
+  GoToHomePage() {
+    this.router.navigate(['/layout/dash-broad']);
   }
 }

@@ -1,11 +1,8 @@
 <nz-layout class="app-layout">
   <nz-sider class="menu-sidebar" nzCollapsible nzWidth="230px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
       [nzTrigger]="null">
-      <div class="sidebar-logo">
-          <a href="" target="_blank">
-              <img src="../../assets/img/LOGO_KTX.png" alt="logo">
-              <!-- <h1>Ant Design Of Angular</h1> -->
-          </a>
+      <div class="sidebar-logo" (click)="GoToHomePage()">
+        <img src="../../assets/img/LOGO_KTX.png" alt="logo">
       </div>
       <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
         <li nz-menu-item nzMatchRouter nzTitle="Đơn hàng" routerLink="/layout/category">
