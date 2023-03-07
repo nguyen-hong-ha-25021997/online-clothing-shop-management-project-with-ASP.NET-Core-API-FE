@@ -3,19 +3,19 @@
     <div nz-col nzSpan="7" style="margin-right: 20px; background-color: #1890ff !important;" class="bg-primary rounded-md">
       <div class="p-md text-white">
         <div class="h2 mt0">Sản phầm đã bán trong ngày:</div>
-        <span style=" display: block; right: 0px; margin: 0px; padding: 2px; text-align: right;">99999999</span>
+        <span style=" display: block; right: 0px; margin: 0px; padding: 2px; text-align: right;">{{numberOfProduct}}</span>
       </div>
     </div>
     <div nz-col nzSpan="7" class="rounded-md"  style="margin-right: 20px;  background-color: rgb(227, 46, 103);" >
       <div class="p-md text-white">
         <div class="h2 mt0">Doanh thu trong ngày</div>
-        <span style=" display: block; right: 0px; margin: 0px; padding: 2px;">99999999</span>
+        <span style=" display: block; right: 0px; margin: 0px; padding: 2px; text-align: right;">{{profit}}</span>
       </div>
     </div>
     <div nz-col nzSpan="7" class="rounded-md" style="margin-right: 20px; background-color: rgb(241, 209, 48);"  >
       <div class="p-md text-white">
         <div class="h2 mt0">Đơn hàng trong ngày</div>
-        <span style=" display: block; right: 0px; margin: 0px; padding: 2px;">99999999</span>
+        <span style=" display: block; right: 0px; margin: 0px; padding: 2px; text-align: right;">{{numberOfOrder}}</span>
       </div>
     </div>
   </div>
@@ -23,17 +23,17 @@
   <div nz-row style="margin-top: 20px;">
     <div nz-col nzSpan="12">
       <ejs-chart id="chart-container1" [primaryXAxis]='primaryYAxis1' [primaryYAxis]='primaryYAxis1'
-        [legendSettings]='legendSettings' [title]='title'>
+        [legendSettings]='legendSettings' title='Sản phẩm năm 2023'>
         <e-series-collection>
-          <e-series [dataSource]='chartData' type='Line' xName='month' yName='sales' name='Sales'></e-series>
+          <e-series [dataSource]='chartData' type='Line' xName='month' yName='orderAmount' name='Sales'></e-series>
         </e-series-collection>
       </ejs-chart>
   
     </div>
     <div nz-col nzSpan="12">
-      <ejs-chart id="chart-container" [primaryXAxis]='primaryXAxis' [title]='title'>
+      <ejs-chart id="chart-container" [primaryXAxis]='primaryXAxis' title='Doanh thu năm 2023'>
         <e-series-collection>
-          <e-series [dataSource]='chartData' type='Column' xName='month' yName='sales' name='Sales'></e-series>
+          <e-series [dataSource]='chartData' type='Column' xName='month' yName='quantity' name='Sales'></e-series>
         </e-series-collection>
       </ejs-chart>
     </div>
