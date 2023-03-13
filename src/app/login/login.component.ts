@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       localStorage.clear();
       localStorage.setItem('token', response.token);
       localStorage.setItem('currentUser', JSON.stringify(response.model))
-      this.router.navigate(['/layout/dashbroad']);
+      this.router.navigate(['/layout/dash-broad']);
     }, (error) => {
       this.message.error('Sai tài khoản hoặc mật khẩu!');
     //  alert('Sai tài khoản hoặc mật khẩu!');
